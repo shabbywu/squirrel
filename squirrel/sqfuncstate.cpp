@@ -10,7 +10,6 @@
 #include "sqopcodes.h"
 #include "sqfuncstate.h"
 
-#ifdef _DEBUG_DUMP
 SQInstructionDesc g_InstrDesc[]={
     {_SC("_OP_LINE")},
     {_SC("_OP_LOAD")},
@@ -74,7 +73,7 @@ SQInstructionDesc g_InstrDesc[]={
     {_SC("_OP_GETBASE")},
     {_SC("_OP_CLOSE")},
 };
-#endif
+
 void DumpLiteral(SQObjectPtr &o)
 {
     switch(sq_type(o)){
@@ -112,7 +111,6 @@ void SQFuncState::Error(const SQChar *err)
     _errfunc(_errtarget,err);
 }
 
-#ifdef _DEBUG_DUMP
 void SQFuncState::Dump(SQFunctionProto *func)
 {
     SQUnsignedInteger n=0,i;
@@ -210,7 +208,6 @@ void SQFuncState::Dump(SQFunctionProto *func)
     scprintf(_SC("stack size[%d]\n"), (SQInt32)func->_stacksize);
     scprintf(_SC("--------------------------------------------------------------------\n\n"));
 }
-#endif
 
 SQInteger SQFuncState::GetNumericConstant(const SQInteger cons)
 {

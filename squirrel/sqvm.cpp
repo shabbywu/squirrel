@@ -1759,7 +1759,7 @@ SQObjectPtr &SQVM::PopGet() { return _stack[--_top]; }
 SQObjectPtr &SQVM::GetUp(SQInteger n) { return _stack[_top+n]; }
 SQObjectPtr &SQVM::GetAt(SQInteger n) { return _stack[n]; }
 
-#ifdef _DEBUG_DUMP
+
 void SQVM::dumpstack(SQInteger stackbase,bool dumpall)
 {
     SQInteger size=dumpall?_stack.size():_top;
@@ -1798,7 +1798,3 @@ void SQVM::dumpstack(SQInteger stackbase,bool dumpall)
         ++n;
     }
 }
-
-
-
-#endif
