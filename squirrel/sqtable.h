@@ -33,8 +33,6 @@ private:
         _HashNode *next;
     };
     _HashNode *_firstfree;
-    _HashNode *_nodes;
-    SQInteger _numofnodes;
     SQInteger _usednodes;
 
 ///////////////////////////
@@ -43,6 +41,9 @@ private:
     SQTable(SQSharedState *ss, SQInteger nInitialSize);
     void _ClearNodes();
 public:
+    _HashNode *_nodes;
+    SQInteger _numofnodes;
+
     static SQTable* Create(SQSharedState *ss,SQInteger nInitialSize)
     {
         SQTable *newtable = (SQTable*)SQ_MALLOC(sizeof(SQTable));
