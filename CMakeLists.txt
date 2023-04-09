@@ -54,7 +54,7 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     endif()
   endif()
   foreach(t ${tgts})
-    target_compile_definitions(${t} PUBLIC -D_SQ64)
+    target_compile_definitions(${t} PUBLIC)
   endforeach()
 endif()
 
