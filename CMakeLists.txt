@@ -23,10 +23,10 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     -Wextra
     -pedantic
     -Wcast-qual
-    "$<$<CONFIG:Release>:-O3>"
-    "$<$<CONFIG:RelWithDebInfo>:-O3;-g>"
-    "$<$<CONFIG:MinSizeRel>:-Os>"
-    "$<$<CONFIG:Debug>:-pg;-pie;-gstabs;-g3;-Og>"
+    # "$<$<CONFIG:Release>:-O3>"
+    # "$<$<CONFIG:RelWithDebInfo>:-O3;-g>"
+    # "$<$<CONFIG:MinSizeRel>:-Os>"
+    # "$<$<CONFIG:Debug>:-pg;-pie;-gstabs;-g3;-Og>"
     )
 elseif(MSVC)
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
