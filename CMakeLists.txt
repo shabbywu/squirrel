@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
   add_compile_options(
-    "$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti;-fno-exceptions>"
+    # "$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti;-fno-exceptions>"
     -fno-strict-aliasing
     -Wall
     -Wextra
