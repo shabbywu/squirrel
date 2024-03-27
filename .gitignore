@@ -1,0 +1,7 @@
+# Folders created at compilation
+bin/
+lib/
+
+# Folders created at documentation generation
+doc/build/
+build
