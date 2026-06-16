@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.11)
 project(squirrel VERSION 3.2 LANGUAGES C CXX)
 
 option(DISABLE_STATIC "Avoid building/installing static libraries.")
