@@ -5,3 +5,4 @@ lib/
 # Folders created at documentation generation
 doc/build/
 build
+build-emscripten/

@@ -4,6 +4,13 @@
         {
             "name": "default",
             "binaryDir": "${sourceDir}/build"
+        },
+        {
+            "name": "emscripten",
+            "binaryDir": "${sourceDir}/build-emscripten",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
         }
     ]
 }

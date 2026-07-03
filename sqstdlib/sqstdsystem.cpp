@@ -5,6 +5,16 @@
 #include <stdio.h>
 #include <sqstdsystem.h>
 
+#if defined(__EMSCRIPTEN__) && defined(SQ_EMSCRIPTEN_SAFE_STDLIB)
+
+SQInteger sqstd_register_systemlib(HSQUIRRELVM v)
+{
+    (void)v;
+    return 1;
+}
+
+#else
+
 #ifdef SQUNICODE
 #include <wchar.h>
 #define scgetenv _wgetenv
@@ -145,3 +155,5 @@ SQInteger sqstd_register_systemlib(HSQUIRRELVM v)
     }
     return 1;
 }
+
+#endif
