@@ -2,7 +2,30 @@ cmake_minimum_required(VERSION 3.11)
 project(squirrel VERSION 3.2 LANGUAGES C CXX)
 
 option(DISABLE_STATIC "Avoid building/installing static libraries.")
+option(DISABLE_DYNAMIC "Avoid building/installing dynamic libraries.")
 option(LONG_OUTPUT_NAMES "Use longer names for binaries and libraries: squirrel3 (not sq).")
+option(SQ_DISABLE_INTERPRETER "Avoid building/installing the sq interpreter.")
+option(SQ_DISABLE_INSTALLER "Avoid installing squirrel targets and headers.")
+option(SQ_EMSCRIPTEN_BUILD_EMSQ "Build the Emscripten emsq module." OFF)
+option(SQ_EMSCRIPTEN_SAFE_STDLIB "Disable unsafe standard library APIs for Emscripten." OFF)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  set(DISABLE_DYNAMIC
+      ON
+      CACHE BOOL "Avoid building/installing dynamic libraries." FORCE)
+  set(SQ_DISABLE_INSTALLER
+      ON
+      CACHE BOOL "Avoid installing squirrel targets and headers." FORCE)
+  set(SQ_DISABLE_INTERPRETER
+      ON
+      CACHE BOOL "Avoid building/installing the sq interpreter." FORCE)
+  set(SQ_EMSCRIPTEN_BUILD_EMSQ
+      ON
+      CACHE BOOL "Build the Emscripten emsq module." FORCE)
+  set(SQ_EMSCRIPTEN_SAFE_STDLIB
+      ON
+      CACHE BOOL "Disable unsafe standard library APIs for Emscripten." FORCE)
+endif()
 
 if (NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
@@ -33,10 +56,20 @@ elseif(MSVC)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
+if(SQ_EMSCRIPTEN_SAFE_STDLIB)
+  add_definitions(-DSQ_EMSCRIPTEN_SAFE_STDLIB)
+endif()
+
 add_subdirectory(squirrel)
 add_subdirectory(sqstdlib)
 if(NOT SQ_DISABLE_INTERPRETER)
   add_subdirectory(sq)
+endif()
+if(SQ_EMSCRIPTEN_BUILD_EMSQ)
+  if(DISABLE_STATIC)
+    message(FATAL_ERROR "SQ_EMSCRIPTEN_BUILD_EMSQ requires static libraries.")
+  endif()
+  add_subdirectory(emsq)
 endif()
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
