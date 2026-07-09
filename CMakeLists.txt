@@ -47,7 +47,9 @@ set(CMAKE_CXX_STANDARD 11)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
   add_compile_options(
-    "$<$<COMPILE_LANGUAGE:CXX>:-fno-rtti;-fno-exceptions>"
+    # The Python bindings use C++ RTTI for Squirrel object wrapper types.
+    # Keeping -fno-rtti here drops typeinfo for SQRefCounted on ELF builds.
+    "$<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>"
     -fno-strict-aliasing
     -Wall
     -Wextra
